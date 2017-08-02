@@ -75,7 +75,7 @@ text-align: center;
 	// It's also very similar to the NYT search application. In fact, I copied a ton of code from there.
 	function runTableQuery(){
 		// Here we get the location of the root page.
-		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+		// We use this instead of explicitly saying the URL is localhost:3000 because the url will change when we deploy.
 		var currentURL = window.location.origin;
 		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
 		$.ajax({url: currentURL + "/api/tables", method: "GET"})
@@ -143,5 +143,6 @@ text-align: center;
 	runTableQuery();
 	runWaitListQuery();
 </script>
-    </body>
+</body>
+</html>
     
