@@ -6,55 +6,68 @@
     
     
   <body>
-      <div class="jumbotron">
+    <div class="jumbotron">
           <h1>Hot Restaurants</h1>
           <p>...</p>
           
 <!--        verticle look-->
 <div class="row">
       <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="homepage" href="/home.html" role="button">Homepage</a></p>
+          <p><a class="btn btn-primary btn-lg" id="homepage" href="../public/home.html" role="button">Homepage</a></p>
     </div>
     
     <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="view" href="/table.html" role="button">View Reservations</a></p>
+          <p><a class="btn btn-primary btn-lg" id="view" href="../public/table.html" role="button">View Reservations</a></p>
     </div>
     
     <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="new" href="/reserve.html" role="button">Make Reservations</a></p>
+          <p><a class="btn btn-primary btn-lg" id="new" href="../public/reserve.html" role="button">Make Reservations</a></p>
     </div>
 </div>
-<!--          end of jumbotron-->
+<!--            end of columns-->
       </div>
+<!--          end of jumbotron-->
+      
       
     <div class="row">
       <div class="col-md-12">
-       <div class="Form" class="container">
-		<section class="contactform">
-				
-			<form id="contactForm">
-				<ul>
-					
-						<Label for="insert">Name</label>
-						<input type="text" name="name" id="insert" placeholder="Jane Doe" required="required">
-					
-					    <Label for="phone">Phone Number</label>
-						<input type="text" name="phoneNumber" id="phone" placeholder="000-000-0000" required="required">
-                    
-						<Label for="email">Email</label>
-						<input type="text" name="email" id="email" placeholder="JaneDoe@blank.com" required="required">
-                    
-                        <Label for="email">Unique Code</label>
-						<input type="text" name="uniqueCode" id="UniqueCode" placeholder="0000" required="required">
-					
-					
-					
-						
-				
-				</ul>
-					<input id="#add-btn" type="submit" name="submit">
-			</form>
-        </div>
+      <div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">Table Reservation</h4>
+					</div>
+					<div class="panel-body">
+
+						<form role="form">
+
+							<div class="form-group">
+								<label for="">Name</label>
+								<input type="text" class="form-control" id="reserve_name">
+							</div>
+
+							<div class="form-group">
+								<label for="">Phone Number</label>
+								<input type="text" class="form-control" id="reserve_phone">
+							</div>
+
+							<div class="form-group">
+								<label for="">Email</label>
+								<input type="text" class="form-control" id="reserve_email">
+							</div>
+
+							<div class="form-group">
+								<label for="">Unique ID</label>
+								<input type="text" class="form-control" id="reserve_uniqueID">
+							</div>
+
+							<button type="submit" class="btn btn-primary submit">Submit</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
     </div>
  </div>
         
@@ -118,7 +131,53 @@ position: relative;
 }
 
 </style>
+        
+ <footer class="footer">
+	      <div class="container">
+	        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> </p>
+	      </div>
+	    </footer>
 </body>
 </html>
     
-    <script src="/reserve.js"></script>
+   <script type="text/javascript">
+	// In this code below we create the Front-end Javascript which "POSTS" our form data to our express server.
+	// In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+	// Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+	// In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+	$(".submit").on("click", function(){
+		// Here we grab the form elements
+		var newReservation = {
+			customerName: $('#reserve_name').val().trim(),
+			phoneNumber: $('#reserve_phone').val().trim(),
+			customerEmail: $('#reserve_email').val().trim(),
+			customerID: $('#reserve_uniqueID').val().trim()
+		};
+		console.log(newReservation);
+		// This line is the magic. It's very similar to the standard ajax function we used.
+		// Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+		// The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+		// depending on if a tables is available or not.
+		// Here we get the location of the root page.
+		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+		var currentURL = window.location.origin;
+	    $.post(currentURL + "/api/tables", newReservation,
+	    function(data){
+    	// Callback receives "true" or "false" from api-routes, if table is available or not
+	    	// If a table is available... tell user they are booked.
+	    	if(data == true){
+	    		alert("Yay! You are officially booked!")
+	    	}
+	    	// If a table is not available... tell user they on the waiting list.
+	    	if(data == false){
+	    		alert("Sorry you are on the wait list")
+	    	}
+	    	// Clear the form when submitting
+    		$('#reserve_name').val("");
+			$('#reserve_phone').val("");
+			$('#reserve_email').val("");
+			$('#reserve_uniqueID').val("");
+	    });
+return false;
+});
+</script>
