@@ -1,11 +1,12 @@
 <html>
     <head></head>
     <title>Hot Restaurants</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     
     
-  <body>
+<body>
         <div class="jumbotron">
           <h1>Hot Restaurants</h1>
           <p>...</p>
@@ -13,18 +14,65 @@
 <!--        verticle look-->
 <div class="row">
       <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="homepage" href="#" role="button">Homepage</a></p>
+          <p><a class="btn btn-primary btn-lg" id="homepage" href="../app/public/home.html" role="button">Homepage</a></p>
     </div>
     
     <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="view" href="#" role="button">View Reservations</a></p>
+          <p><a class="btn btn-primary btn-lg" id="view" href="../app/public/table.html" role="button">View Reservations</a></p>
     </div>
     
     <div class="col-md-4">
-          <p><a class="btn btn-primary btn-lg" id="new" href="#" role="button">Make Reservations</a></p>
+          <p><a class="btn btn-primary btn-lg" id="new" href="#" role="../app/reserve.html">Make Reservations</a></p>
     </div>
 </div>
-<!--          end of jumbotron-->
+<!--            end of columns-->
       </div>
+<!--          end of jumbotron-->
+      
+    
+<div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Unique ID Search</strong></h3>
+          </div>
+          <div class="panel-body">
+            <input type="text" id="UniqueIDSearch" class="form-control">
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+
+            </div>
+         </div>
+<!--            search bar end-->
+<div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Reservations</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <h2 id="name">Chris O'hara</h2>
+              <div id="stats">
+                <h3><strong>Phone Number:</strong> <span id="phonenumber">000-222-3334</span></h3>
+                <h3><strong>Email:</strong> <span id="email">ChrisOhara@gmail.com</span></h3>
+                <h3><strong>UniqueID:</strong> <span id="force-points">1123L</span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+            
+</div>
+    
+<style>
+.jumbotron {
+text-align: center;
+}
     </body>
+</html>
+
     
